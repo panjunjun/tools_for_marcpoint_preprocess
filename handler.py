@@ -42,10 +42,12 @@ class AlgorithmDemoHandler(BaseHandler):
         item1_id = int(self.get_argument("item1_id"))
         item2_id = int(self.get_argument("item2_id"))
         category_id = int(self.get_argument("category_id"))
-        vr = VR(source_table=u"itemmonthlysales2015",target_table=u"itemmonthlyrelation_2015",date_range=u"2015-12-01")
+        vr = VR(
+            source_table=u"itemmonthlysales2015", target_table=u"itemmonthlyrelation_2015", date_range=u"2015-12-01")
         vr.main(item1_id=item1_id, item2_id=item2_id, category_id=category_id)
         item_pair = vr.competitive_item_pair_data.values
-        item1 = item_pair[0]
-        item2 = item_pair[1]
+        source_item = item_pair[0]
+        target_item = item_pair[1]
         dimension_list = vr.tag_dict[vr.category_id].keys()
-        self.render("demo.html", item1=item1, item2=item2, fv=vr.feature_vector, y=vr.predict_y, li=dimension_list)
+        self.render(
+            "demo.html", si=source_item, ti=target_item, fv=vr.feature_vector, y=vr.predict_y, li=dimension_list)
