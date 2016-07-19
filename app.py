@@ -5,7 +5,7 @@ import tornado.web
 from tornado.options import define, options
 from router import handler, template_path
 define(u"port", default=8188, help="run on given port", type=int)
-
+define(u"address", default='127.0.0.1', help="access from remote", type=str)
 
 if __name__ == u"__main__":
     tornado.options.parse_command_line()
